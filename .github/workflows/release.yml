@@ -32,4 +32,4 @@ jobs:
     - name: Push generated package to GitHub registry
       run: dotnet nuget push ./MikyM.Common.Utilities/out/*.nupkg --skip-duplicate --no-symbols true
     - name: Push generated package to NuGet registry
-      run: dotnet nuget push *.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
+      run: dotnet nuget push ./MikyM.Common.Utilities/out/*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
