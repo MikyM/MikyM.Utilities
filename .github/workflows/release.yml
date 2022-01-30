@@ -14,7 +14,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Setup .NET Core @ Latest
+    - name: Setup .NET 6.0
       uses: actions/setup-dotnet@v1
       with:
         source-url: https://nuget.pkg.github.com/MikyM/index.json
@@ -31,3 +31,5 @@ jobs:
         dotnet pack -c Release -o out 
     - name: Push generated package to GitHub registry
       run: dotnet nuget push ./MikyM.Common.Utilities/out/*.nupkg --skip-duplicate --no-symbols true
+    - name: Push generated package to NuGet registry
+      run: dotnet nuget push *.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
