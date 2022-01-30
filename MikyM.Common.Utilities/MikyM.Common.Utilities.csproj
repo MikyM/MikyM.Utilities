@@ -9,6 +9,7 @@
 		<Authors>Krzysztof Kupisz</Authors>
 		<PackageDescription>Various utilities</PackageDescription>
 		<RepositoryUrl>https://github.com/MikyM/MikyM.Common.Utilities</RepositoryUrl>
+		<PackageLicenseExpression>AGPL-3.0-or-later</PackageLicenseExpression>
 	</PropertyGroup>
 
 	<ItemGroup>
