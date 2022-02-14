@@ -1,22 +1,8 @@
-﻿// This file is part of Lisbeth.Bot project
-//
-// Copyright (C) 2021 Krzysztof Kupisz - MikyM
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Affero General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU Affero General Public License for more details.
-// 
-// You should have received a copy of the GNU Affero General Public License
-// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+﻿namespace MikyM.Common.Utilities;
 
-namespace MikyM.Common.Utilities;
-
+/// <summary>
+/// Asynchronous lock.
+/// </summary>
 public class AsyncLock
 {
     private readonly Task<IDisposable> _releaserTask;
@@ -28,11 +14,22 @@ public class AsyncLock
         _releaser = new Releaser(_semaphore);
         _releaserTask = Task.FromResult(_releaser);
     }
+
+    /// <summary>
+    /// Locks resource synchronously
+    /// </summary>
+    /// <returns>Releaser</returns>
+    /// 
     public IDisposable Lock()
     {
         _semaphore.Wait();
         return _releaser;
     }
+
+    /// <summary>
+    /// Locks resource asynchronously
+    /// </summary>
+    /// <returns>Releaser task</returns>
     public Task<IDisposable> LockAsync()
     {
         var waitTask = _semaphore.WaitAsync();
@@ -45,6 +42,7 @@ public class AsyncLock
                 TaskContinuationOptions.ExecuteSynchronously,
                 TaskScheduler.Default)!;
     }
+
     private class Releaser : IDisposable
     {
         private readonly SemaphoreSlim _semaphore;
