@@ -41,6 +41,16 @@ public static class TypeExtensions
 
         return type.GetGenericTypeDefinition() == typeof(Optional<>);
     }
+    
+    /// <summary>
+    /// Gets the types name while discarding anything that comes after "`" for generic types.
+    /// </summary>
+    /// <param name="type">The type.</param>
+    /// <returns>Types name.</returns>
+    public static string GetName(this Type type)
+    {
+        return !type.IsGenericType ? type.Name : type.Name.Split('`').First();
+    }
 
     /// <summary>
     /// Determines whether the given type is a closed <see cref="Nullable{TValue}"/>.
