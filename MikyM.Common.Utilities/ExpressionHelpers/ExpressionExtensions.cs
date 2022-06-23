@@ -15,4 +15,47 @@ public static class ExpressionExtensions
 
         return setterLambda.Compile();
     }
+
+    /// <summary>
+    /// Gerts the value of a given <see cref="MemberExpression"/>.
+    /// </summary>
+    /// <param name="expression"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
+    public static T? GetMemberExpressionValue<T>(this MemberExpression expression)
+        => (T?)GetMemberExpressionValue(expression);
+
+    /// <summary>
+    /// Gerts the value of a given <see cref="MemberExpression"/>.
+    /// </summary>
+    /// <param name="expression"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
+    public static object?GetMemberExpressionValue(this MemberExpression expression)
+    {
+        var dependencyChain = new List<MemberExpression>();
+        var pointingExpression = expression;
+        while (pointingExpression != null)
+        {
+            dependencyChain.Add(pointingExpression);
+            pointingExpression = pointingExpression.Expression as MemberExpression;
+        }
+
+        if (dependencyChain.Last().Expression is not ConstantExpression baseExpression)
+        {
+            throw new Exception(
+                $"Last expression {dependencyChain.Last().Expression} of dependency chain of {expression} is not a constant." +
+                "Thus the expression value cannot be found.");
+        }
+
+        var resolvedValue = baseExpression.Value;
+
+        for (var i = dependencyChain.Count; i > 0; i--)
+        {
+            var expr = dependencyChain[i - 1];
+            resolvedValue = new PropOrField(expr.Member).GetValue(resolvedValue);
+        }
+
+        return resolvedValue;
+    }
 }
