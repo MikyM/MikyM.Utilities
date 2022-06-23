@@ -22,8 +22,8 @@ public static class ExpressionExtensions
     /// <param name="expression"></param>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
-    public static T? GetMemberExpressionValue<T>(this MemberExpression expression)
-        => (T?)GetMemberExpressionValue(expression);
+    public static T? GetValue<T>(this MemberExpression expression)
+        => (T?)GetValue(expression);
 
     /// <summary>
     /// Gerts the value of a given <see cref="MemberExpression"/>.
@@ -31,7 +31,7 @@ public static class ExpressionExtensions
     /// <param name="expression"></param>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
-    public static object?GetMemberExpressionValue(this MemberExpression expression)
+    public static object? GetValue(this MemberExpression expression)
     {
         var dependencyChain = new List<MemberExpression>();
         var pointingExpression = expression;
