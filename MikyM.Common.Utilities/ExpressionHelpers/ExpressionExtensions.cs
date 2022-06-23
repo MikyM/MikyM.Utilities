@@ -42,11 +42,7 @@ public static class ExpressionExtensions
         }
 
         if (dependencyChain.Last().Expression is not ConstantExpression baseExpression)
-        {
-            throw new Exception(
-                $"Last expression {dependencyChain.Last().Expression} of dependency chain of {expression} is not a constant." +
-                "Thus the expression value cannot be found.");
-        }
+            return null;
 
         var resolvedValue = baseExpression.Value;
 
