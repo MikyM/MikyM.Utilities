@@ -149,7 +149,20 @@ public static class AsyncExecutorExtensions
     /// <summary>
     /// Registers <see cref="IBackgroundExecutor"/> with <see cref="ContainerBuilder"/>.
     /// </summary>
-    /// <param name="services"><see cref="ContainerBuilder"/> instance</param>
-    public static void AddAsyncExecutor(this ContainerBuilder services)
-        => services.RegisterType<BackgroundExecutor>().As<IBackgroundExecutor>().SingleInstance();
+    /// <param name="builder"><see cref="ContainerBuilder"/> instance</param>
+    /// <returns><see cref="ContainerBuilder"/> instance.</returns>
+    public static ContainerBuilder AddAsyncExecutor(this ContainerBuilder builder)
+    {
+        builder.RegisterType<BackgroundExecutor>().As<IBackgroundExecutor>().SingleInstance();
+
+        return builder;
+    }
+
+    /// <summary>
+    /// Registers <see cref="IBackgroundExecutor"/> with <see cref="ContainerBuilder"/>.
+    /// </summary>
+    /// <param name="builder"><see cref="ContainerBuilder"/> instance</param>
+    /// <returns><see cref="ContainerBuilder"/> instance.</returns>
+    public static ContainerBuilder AddBackgroundExecutor(this ContainerBuilder builder)
+        => builder.AddAsyncExecutor();
 }
