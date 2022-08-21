@@ -1,4 +1,4 @@
-using JetBrains.Annotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MikyM.Common.Utilities.Results;
 
@@ -11,6 +11,7 @@ public interface IResult
     /// <summary>
     /// Gets a value indicating whether the result was successful.
     /// </summary>
+    [MemberNotNullWhen(false, nameof(Error))]
     bool IsSuccess { get; }
 
     /// <summary>
@@ -22,18 +23,6 @@ public interface IResult
     /// Gets the inner result, if any.
     /// </summary>
     IResult? Inner { get; }
-
-    /// <summary>
-    /// Tries to get the underlying inner result.
-    /// </summary>
-    /// <returns>true if the result contains an entity; otherwise, false.</returns>
-    bool TryGetInner(out IResult? inner);
-
-    /// <summary>
-    /// Tries to get the underlying error result.
-    /// </summary>
-    /// <returns>true if the result contains an entity; otherwise, false.</returns>
-    bool TryGetError(out IResultError? error);
 }
 
 /// <summary>

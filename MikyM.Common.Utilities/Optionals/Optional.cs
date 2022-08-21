@@ -30,7 +30,7 @@ public readonly struct Optional<TValue> : IOptional
     {
         get
         {
-            if (this.HasValue)
+            if (HasValue)
             {
                 return _value;
             }
@@ -49,13 +49,13 @@ public readonly struct Optional<TValue> : IOptional
     public Optional(TValue value)
     {
         _value = value;
-        this.HasValue = true;
+        HasValue = true;
     }
 
     /// <inheritdoc />
     [MemberNotNullWhen(true, nameof(Value))]
     [MemberNotNullWhen(true, nameof(_value))]
-    public bool IsDefined() => this.HasValue && _value is not null;
+    public bool IsDefined() => HasValue && _value is not null;
 
     /// <summary>
     /// Determines whether the option has a defined value; that is, whether it both has a value and that value is
@@ -112,7 +112,7 @@ public readonly struct Optional<TValue> : IOptional
     /// <returns>true if the instances are considered equal; otherwise, false.</returns>
     public bool Equals(Optional<TValue> other)
     {
-        return EqualityComparer<TValue>.Default.Equals(_value, other._value) && this.HasValue == other.HasValue;
+        return EqualityComparer<TValue>.Default.Equals(_value, other._value) && HasValue == other.HasValue;
     }
 
     /// <inheritdoc />
@@ -124,13 +124,13 @@ public readonly struct Optional<TValue> : IOptional
     /// <inheritdoc />
     public override int GetHashCode()
     {
-        return HashCode.Combine(_value, this.HasValue);
+        return HashCode.Combine(_value, HasValue);
     }
 
     /// <inheritdoc />
     public override string ToString()
     {
-        return this.HasValue
+        return HasValue
             ? $"{{{_value?.ToString() ?? "null"}}}"
             : "Empty";
     }

@@ -5,5 +5,6 @@ namespace MikyM.Common.Utilities.Results.Errors;
 /// </summary>
 /// <param name="Message">The error message.</param>
 /// <remarks>Used in place of <see cref="InvalidOperationException"/>.</remarks>
+[PublicAPI]
 public record InvalidOperationError(string Message = "The requested operation is invalid.")
     : ResultError(Message);

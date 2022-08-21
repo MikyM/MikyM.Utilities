@@ -1,5 +1,3 @@
-using JetBrains.Annotations;
-
 namespace MikyM.Common.Utilities.Results.Errors;
 
 /// <summary>
@@ -20,7 +18,7 @@ public sealed record ExceptionError : ResultError
     public ExceptionError(Exception exception)
         : base(exception.Message)
     {
-        this.Exception = exception;
+        Exception = exception;
     }
 
     /// <summary>
@@ -31,6 +29,6 @@ public sealed record ExceptionError : ResultError
     public ExceptionError(Exception exception, string message)
         : base(message)
     {
-        this.Exception = exception;
+        Exception = exception;
     }
 }

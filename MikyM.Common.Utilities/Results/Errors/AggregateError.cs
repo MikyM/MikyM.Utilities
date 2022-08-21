@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace MikyM.Common.Utilities.Results.Errors;
 
 /// <summary>
@@ -6,11 +8,12 @@ namespace MikyM.Common.Utilities.Results.Errors;
 /// <param name="Errors">The errors.</param>
 /// <param name="Message">The custom error message, if any.</param>
 /// <remarks>Used in place of <see cref="AggregateException"/>.</remarks>
+[PublicAPI]
 public record AggregateError
 (
     IReadOnlyCollection<IResult> Errors,
     string Message = "One or more errors occurred."
-) : ResultError(Message)
+) : ResultError(BuildMessage(Message, Errors))
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="AggregateError"/> class.
@@ -29,5 +32,32 @@ public record AggregateError
     public AggregateError(params IResult[] errors)
         : this((IReadOnlyCollection<IResult>)errors)
     {
+    }
+
+    private static string BuildMessage(string message, IReadOnlyCollection<IResult> errors)
+    {
+        var sb = new StringBuilder(message);
+        sb.AppendLine();
+
+        var index = 0;
+        foreach (var error in errors)
+        {
+            if (error.IsSuccess)
+            {
+                continue;
+            }
+
+            sb.Append($"[{index}]: ");
+            var errorLines = (error.Error.ToString() ?? "Unknown").Split('\n');
+            foreach (var errorLine in errorLines)
+            {
+                sb.Append("\t");
+                sb.AppendLine(errorLine);
+            }
+
+            ++index;
+        }
+
+        return sb.ToString();
     }
 }

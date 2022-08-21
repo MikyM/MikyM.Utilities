@@ -3,14 +3,14 @@ using MikyM.Common.Utilities.Results.Errors.Bases;
 namespace MikyM.Common.Utilities.Results.Errors;
 
 /// <summary>
-/// Represents an error arising from an argument being outside of an expected range.
+/// Represents an error arising from an argument being invalid.
 /// </summary>
 /// <param name="Name">The name of the argument.</param>
 /// <param name="Message">The error message.</param>
-/// <remarks>Used in place of <see cref="ArgumentOutOfRangeException"/>.</remarks>
+/// <remarks>Used in place of <see cref="ArgumentException"/>.</remarks>
 [PublicAPI]
-public record ArgumentOutOfRangeError
+public record ArgumentInvalidError
 (
     [InvokerParameterName] string Name,
-    string Message = "Value was outside of the expected range"
+    string Message
 ) : ArgumentError(Name, Message);
