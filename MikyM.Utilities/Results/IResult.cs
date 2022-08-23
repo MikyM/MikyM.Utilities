@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 
-namespace MikyM.Common.Utilities.Results;
+namespace MikyM.Utilities.Results;
 
 /// <summary>
 /// Represents the public API of an interface.

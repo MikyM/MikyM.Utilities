@@ -1,4 +1,4 @@
-namespace MikyM.Common.Utilities.Optionals;
+namespace MikyM.Utilities.Optionals;
 
 /// <summary>
 /// Defines basic functionality for an optional.

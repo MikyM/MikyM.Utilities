@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 
-namespace MikyM.Common.Utilities.Optionals;
+namespace MikyM.Utilities.Optionals;
 
 /// <summary>
 /// Represents an optional value. This is mainly used for JSON de/serializalization where a value can be either

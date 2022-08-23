@@ -1,9 +1,7 @@
-using MikyM.Common.Utilities.Results.Errors;
-
-namespace MikyM.Common.Utilities.Results;
-
-using System;
 using System.Diagnostics.CodeAnalysis;
+using MikyM.Utilities.Results.Errors;
+
+namespace MikyM.Utilities.Results;
 
 #pragma warning disable SA1402
 

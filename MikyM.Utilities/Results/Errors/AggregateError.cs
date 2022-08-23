@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace MikyM.Common.Utilities.Results.Errors;
+namespace MikyM.Utilities.Results.Errors;
 
 /// <summary>
 /// Represents a set of errors produced by an operation.

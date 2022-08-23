@@ -1,6 +1,6 @@
-﻿using MikyM.Common.Utilities.Optionals;
+﻿using MikyM.Utilities.Optionals;
 
-namespace MikyM.Common.Utilities.Extensions;
+namespace MikyM.Utilities.Extensions;
 
 public static class TypeExtensions
 {

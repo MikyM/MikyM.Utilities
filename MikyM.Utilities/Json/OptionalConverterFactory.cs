@@ -1,9 +1,9 @@
 ﻿using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using MikyM.Common.Utilities.Optionals;
+using MikyM.Utilities.Optionals;
 
-namespace MikyM.Common.Utilities.Json;
+namespace MikyM.Utilities.Json;
 
 /// <summary>
 /// Creates converters for <see cref="Optional{TValue}"/>.

@@ -1,12 +1,10 @@
-﻿using Autofac;
-using Microsoft.Extensions.DependencyInjection;
+﻿#nullable disable
+using Autofac;
 using Microsoft.Extensions.Logging;
-using MikyM.Common.Utilities.Extensions;
 
-#nullable disable
 // ReSharper disable UseAwaitUsing
 
-namespace MikyM.Common.Utilities;
+namespace MikyM.Utilities;
 
 /// <summary>
 /// Asynchronous executor.

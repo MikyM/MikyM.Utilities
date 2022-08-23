@@ -1,6 +1,6 @@
-using MikyM.Common.Utilities.Results.Errors.Bases;
+using MikyM.Utilities.Results.Errors.Bases;
 
-namespace MikyM.Common.Utilities.Results.Errors;
+namespace MikyM.Utilities.Results.Errors;
 
 /// <summary>
 /// Represents an error arising from an argument being outside of an expected range.

@@ -1,4 +1,4 @@
-namespace MikyM.Common.Utilities.Results;
+namespace MikyM.Utilities.Results;
 
 /// <summary>
 /// Represents an error returned by a result.

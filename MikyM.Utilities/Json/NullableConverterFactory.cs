@@ -1,8 +1,8 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
-using MikyM.Common.Utilities.Extensions;
+using MikyM.Utilities.Extensions;
 
-namespace MikyM.Common.Utilities.Json;
+namespace MikyM.Utilities.Json;
 
 /// <summary>
 /// Creates instances of <see cref="NullableConverter{TValue}"/>.

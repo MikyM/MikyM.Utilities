@@ -1,6 +1,6 @@
 ﻿using System.Collections.Concurrent;
 
-namespace MikyM.Common.Utilities;
+namespace MikyM.Utilities;
 
 
 /// <summary>

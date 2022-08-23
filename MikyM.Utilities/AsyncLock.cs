@@ -1,4 +1,4 @@
-﻿namespace MikyM.Common.Utilities;
+﻿namespace MikyM.Utilities;
 
 /// <summary>
 /// Asynchronous lock.

@@ -1,4 +1,4 @@
-﻿namespace MikyM.Common.Utilities.Extensions;
+﻿namespace MikyM.Utilities.Extensions;
 
 /// <summary>
 /// Helper methods for the lists.

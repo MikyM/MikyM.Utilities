@@ -1,6 +1,6 @@
 using System.Reflection;
 
-namespace MikyM.Common.Utilities.ExpressionHelpers;
+namespace MikyM.Utilities.ExpressionHelpers;
 
 public class PropOrField
 {

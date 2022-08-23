@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace MikyM.Common.Utilities.ExpressionHelpers;
+namespace MikyM.Utilities.ExpressionHelpers;
 
 public static class ExpressionExtensions
 {

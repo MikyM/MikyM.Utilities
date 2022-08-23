@@ -1,4 +1,4 @@
-namespace MikyM.Common.Utilities.Results;
+namespace MikyM.Utilities.Results;
 
 /// <summary>
 /// Acts as a base class for result errors.

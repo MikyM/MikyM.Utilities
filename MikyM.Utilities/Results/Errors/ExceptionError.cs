@@ -1,4 +1,4 @@
-namespace MikyM.Common.Utilities.Results.Errors;
+namespace MikyM.Utilities.Results.Errors;
 
 /// <summary>
 /// Represents an error caused by an exception.

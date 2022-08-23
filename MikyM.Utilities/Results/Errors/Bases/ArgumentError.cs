@@ -1,4 +1,4 @@
-namespace MikyM.Common.Utilities.Results.Errors.Bases;
+namespace MikyM.Utilities.Results.Errors.Bases;
 
 /// <summary>
 /// Represents an error arising from an argument to a function.
