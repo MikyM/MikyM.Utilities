@@ -4,11 +4,11 @@
 		<TargetFramework>net6.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<PackageId>MikyM.Common.Utilities</PackageId>
-		<Version>1.1.2</Version>
+		<PackageId>MikyM.Utilities</PackageId>
+		<Version>1.0.0</Version>
 		<Authors>Krzysztof Kupisz</Authors>
 		<PackageDescription>Various utilities</PackageDescription>
-		<RepositoryUrl>https://github.com/MikyM/MikyM.Common.Utilities</RepositoryUrl>
+		<RepositoryUrl>https://github.com/MikyM/MikyM.Utilities</RepositoryUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 	</PropertyGroup>
