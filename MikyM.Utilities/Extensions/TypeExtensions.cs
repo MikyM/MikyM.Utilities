@@ -2,8 +2,19 @@
 
 namespace MikyM.Utilities.Extensions;
 
+/// <summary>
+/// Type extensions.
+/// </summary>
+[PublicAPI]
 public static class TypeExtensions
 {
+    /// <summary>
+    /// Extended get interfaces method.
+    /// </summary>
+    /// <param name="type"></param>
+    /// <param name="includeInherited"></param>
+    /// <param name="fullSet"></param>
+    /// <returns></returns>
     public static IEnumerable<Type> GetInterfaces(this Type type, bool includeInherited, bool fullSet = true)
     {
         if ((includeInherited || type.BaseType is null) && fullSet)
@@ -153,6 +164,28 @@ public static class TypeExtensions
     /// </summary>
     public static bool IsDirectAncestor(this Type ancestorCandidate, Type type)
         => type.GetTypeInheritance().IsDirectAncestor(ancestorCandidate);
+
+    /// <summary>
+    /// Gets the direct ancestors of a given type.
+    /// </summary>
+    public static IEnumerable<Type> GetDirectAncestors(this Type type, bool onlyInterfaces = false)
+        => onlyInterfaces
+            ? type.GetTypeInheritance().Ancestors.Select(x => x.Node).Where(x => x.IsInterface)
+            : type.GetTypeInheritance().Ancestors.Select(x => x.Node);
+
+    /// <summary>
+    /// Gets the direct ancestors of a given type.
+    /// </summary>
+    public static IEnumerable<Type> GetDirectInterfaceAncestors(this Type type)
+        => GetDirectAncestors(type, true);
+    
+    /// <summary>
+    /// Gets the direct ancestors of a given type.
+    /// </summary>
+    public static IEnumerable<Type> GetDirectClassAncestors(this Type type, bool skipAbstract = false)
+        => skipAbstract
+            ? type.GetTypeInheritance().Ancestors.Select(x => x.Node).Where(x => x.IsClass && !x.IsAbstract)
+            : type.GetTypeInheritance().Ancestors.Select(x => x.Node).Where(x => x.IsClass);
 
     /// <summary>
     /// Inheritance tree
