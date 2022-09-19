@@ -174,6 +174,12 @@ public static class TypeExtensions
             : type.GetTypeInheritance().Ancestors.Select(x => x.Node);
 
     /// <summary>
+    /// Gets interface by naming convention.
+    /// </summary>
+    public static Type? GetInterfaceByNamingConvention(this Type type)
+        => type.GetInterface($"I{type.Name}");
+    
+    /// <summary>
     /// Gets the direct ancestors of a given type.
     /// </summary>
     public static IEnumerable<Type> GetDirectInterfaceAncestors(this Type type)
