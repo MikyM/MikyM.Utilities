@@ -1,5 +1,6 @@
 ﻿#nullable disable
 using Autofac;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 // ReSharper disable UseAwaitUsing
@@ -48,17 +49,17 @@ public interface IBackgroundExecutor
 [PublicAPI]
 public class BackgroundExecutor : IBackgroundExecutor
 {
-    private readonly ILifetimeScope _lifetimeScope;
+    private readonly IServiceProvider _serviceProvider;
     private readonly ILogger<BackgroundExecutor> _logger;
 
     /// <summary>
     /// Constructor.
     /// </summary>
-    /// <param name="lifetimeScope">Scope.</param>
+    /// <param name="serviceProvider">Scope.</param>
     /// <param name="logger">Logger.</param>
-    public BackgroundExecutor(ILifetimeScope lifetimeScope, ILogger<BackgroundExecutor> logger)
+    public BackgroundExecutor(IServiceProvider serviceProvider, ILogger<BackgroundExecutor> logger)
     {
-        _lifetimeScope = lifetimeScope;
+        _serviceProvider = serviceProvider;
         _logger = logger;
 
     }
@@ -68,9 +69,9 @@ public class BackgroundExecutor : IBackgroundExecutor
     {
         return Task.Run(async () =>
         {
-            using var scope = _lifetimeScope.BeginLifetimeScope();
+            using var scope = _serviceProvider.CreateScope();
             {
-                var service = scope.Resolve<TService>();
+                var service = scope.ServiceProvider.GetRequiredService<TService>();
 
                 try
                 {
@@ -89,9 +90,9 @@ public class BackgroundExecutor : IBackgroundExecutor
     {
         return Task.Run(() =>
         {
-            using var scope = _lifetimeScope.BeginLifetimeScope();
+            using var scope = _serviceProvider.CreateScope();
             {
-                var service = scope.Resolve<TService>();
+                var service = scope.ServiceProvider.GetRequiredService<TService>();
 
                 try
                 {
@@ -163,4 +164,20 @@ public static class AsyncExecutorExtensions
     /// <returns><see cref="ContainerBuilder"/> instance.</returns>
     public static ContainerBuilder AddBackgroundExecutor(this ContainerBuilder builder)
         => builder.AddAsyncExecutor();
+
+    /// <summary>
+    /// Registers <see cref="IBackgroundExecutor"/> with <see cref="IServiceCollection"/>.
+    /// </summary>
+    /// <param name="serviceCollection"><see cref="IServiceCollection"/> instance</param>
+    /// <returns><see cref="IServiceCollection"/> instance.</returns>
+    public static IServiceCollection AddAsyncExecutor(this IServiceCollection serviceCollection)
+        => serviceCollection.AddBackgroundExecutor();
+
+    /// <summary>
+    /// Registers <see cref="IBackgroundExecutor"/> with <see cref="IServiceCollection"/>.
+    /// </summary>
+    /// <param name="serviceCollection"><see cref="IServiceCollection"/> instance</param>
+    /// <returns><see cref="IServiceCollection"/> instance.</returns>
+    public static IServiceCollection AddBackgroundExecutor(this IServiceCollection serviceCollection)
+        => serviceCollection.AddSingleton<IBackgroundExecutor, BackgroundExecutor>();
 }

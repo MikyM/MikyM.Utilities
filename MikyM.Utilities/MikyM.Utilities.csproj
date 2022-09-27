@@ -5,7 +5,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<PackageId>MikyM.Utilities</PackageId>
-		<Version>1.0.4</Version>
+		<Version>1.0.5</Version>
 		<Authors>Krzysztof Kupisz</Authors>
 		<PackageDescription>Various utilities</PackageDescription>
 		<RepositoryUrl>https://github.com/MikyM/MikyM.Utilities</RepositoryUrl>
