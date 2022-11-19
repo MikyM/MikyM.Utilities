@@ -3,8 +3,17 @@ using System.Text;
 
 namespace MikyM.Utilities.Extensions;
 
+/// <summary>
+/// 
+/// </summary>
+[PublicAPI]
 public static class StringExtensions
 {
+    /// <summary>
+    /// Converts given text to snake case.
+    /// </summary>
+    /// <param name="text">Test to convert.</param>
+    /// <returns>Converted text.</returns>
     public static string ToSnakeCase(this string text)
     {
         if (string.IsNullOrEmpty(text))

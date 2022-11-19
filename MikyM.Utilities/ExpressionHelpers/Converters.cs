@@ -2,6 +2,10 @@
 
 namespace MikyM.Utilities.ExpressionHelpers;
 
+/// <summary>
+/// 
+/// </summary>
+[PublicAPI]
 public static class Converters
 {
     /// <summary>

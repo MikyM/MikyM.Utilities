@@ -5,6 +5,13 @@
 /// </summary>
 public static class ListExtensions
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="source"></param>
+    /// <param name="chunkSize"></param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
     public static List<List<T>> ChunkBy<T>(this List<T> source, int chunkSize)
     {
         return source

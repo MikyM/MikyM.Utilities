@@ -11,6 +11,9 @@ public class ConcurrentTaskQueue
     private readonly SemaphoreSlim _semaphore;
     private readonly ConcurrentQueue<TaskCompletionSource<bool>> _queue = new();
 
+    /// <summary>
+    /// 
+    /// </summary>
     public ConcurrentTaskQueue()
         => _semaphore = new SemaphoreSlim(1);
 

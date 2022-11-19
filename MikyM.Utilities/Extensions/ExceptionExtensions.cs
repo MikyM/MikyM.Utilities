@@ -1,12 +1,26 @@
 ﻿namespace MikyM.Utilities.Extensions;
 
+/// <summary>
+/// 
+/// </summary>
+[PublicAPI]
 public static class ExceptionExtensions
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="ex"></param>
+    /// <returns></returns>
     public static string GetFullMessage(this Exception ex)
     {
         return ex.InnerException is null ? ex.Message : ex.Message + " --> " + ex.InnerException.GetFullMessage();
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="exception"></param>
+    /// <returns></returns>
     public static IEnumerable<Exception> GetAllExceptions(this Exception exception)
     {
         yield return exception;
@@ -19,6 +33,11 @@ public static class ExceptionExtensions
                 yield return innerEx;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="exception"></param>
+    /// <returns></returns>
     public static string ToFormattedString(this Exception exception)
     {
         var messages = exception.GetAllExceptions()

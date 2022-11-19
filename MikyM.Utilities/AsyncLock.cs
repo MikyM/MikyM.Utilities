@@ -3,12 +3,16 @@
 /// <summary>
 /// Asynchronous lock.
 /// </summary>
+[PublicAPI]
 public class AsyncLock
 {
     private readonly Task<IDisposable> _releaserTask;
-    private readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
+    private readonly SemaphoreSlim _semaphore = new (1, 1);
     private readonly IDisposable _releaser;
 
+    /// <summary>
+    /// 
+    /// </summary>
     public AsyncLock()
     {
         _releaser = new Releaser(_semaphore);

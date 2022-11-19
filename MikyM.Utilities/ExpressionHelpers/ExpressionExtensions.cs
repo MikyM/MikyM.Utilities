@@ -2,6 +2,9 @@
 
 namespace MikyM.Utilities.ExpressionHelpers;
 
+/// <summary>
+/// 
+/// </summary>
 public static class ExpressionExtensions
 {
     /// <summary>

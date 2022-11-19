@@ -3,6 +3,9 @@ using System.Text.Json.Serialization;
 
 namespace MikyM.Utilities.Extensions;
 
+/// <summary>
+/// 
+/// </summary>
 public static class JsonSerializerExtensions
 {
     /// <summary>
