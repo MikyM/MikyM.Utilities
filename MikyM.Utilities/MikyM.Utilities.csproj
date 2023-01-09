@@ -5,12 +5,14 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<PackageId>MikyM.Utilities</PackageId>
-		<Version>2.0.2</Version>
+		<Version>2.0.3</Version>
 		<Authors>Krzysztof Kupisz</Authors>
 		<PackageDescription>Various utilities</PackageDescription>
 		<RepositoryUrl>https://github.com/MikyM/MikyM.Utilities</RepositoryUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 	</PropertyGroup>
 
 	<ItemGroup>
