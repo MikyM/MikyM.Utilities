@@ -3,8 +3,9 @@
 namespace MikyM.Utilities.ExpressionHelpers;
 
 /// <summary>
-/// 
+/// ExpressionExtensions
 /// </summary>
+[PublicAPI]
 public static class ExpressionExtensions
 {
     /// <summary>
