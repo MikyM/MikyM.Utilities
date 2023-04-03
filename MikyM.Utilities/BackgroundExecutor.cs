@@ -1,6 +1,4 @@
-﻿#nullable disable
-using Autofac;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 // ReSharper disable UseAwaitUsing
@@ -14,21 +12,21 @@ namespace MikyM.Utilities;
 public interface IBackgroundExecutor
 {
     /// <summary>
-    /// Executes given <see cref="Func{TResult, Task}"/> asynchronously on a background thread within a created child <see cref="ILifetimeScope"/>.
+    /// Executes given <see cref="Func{TResult, Task}"/> asynchronously on a background thread within a created child scope.
     /// </summary>
     /// <param name="func">Method to invoke.</param>
     /// <typeparam name="TService">Type of the service.</typeparam>
     /// <returns>A stub task representing the background work.</returns>
-    public Task ExecuteAsync<TService>(Func<TService, Task> func);
+    public Task ExecuteAsync<TService>(Func<TService, Task> func) where TService : notnull;
 
     /// <summary>
-    /// Executes given <see cref="Func{TResult, Task}"/> asynchronously on a background thread within a created child <see cref="ILifetimeScope"/>.
+    /// Executes given <see cref="Func{TResult, Task}"/> asynchronously on a background thread within a created child scope.
     /// </summary>
     /// <param name="func">Method to invoke.</param>
     /// <typeparam name="TService">Type of the service.</typeparam>
     /// <typeparam name="TResult">Type of the result.</typeparam>
     /// <returns>A stub task representing the background work.</returns>
-    public Task ExecuteAsync<TService, TResult>(Func<TService, TResult> func);
+    public Task ExecuteAsync<TService, TResult>(Func<TService, TResult> func) where TService : notnull;
     
     /// <summary>
     /// Executes given <see cref="Func{Task}"/> asynchronously on a background thread.
@@ -65,11 +63,11 @@ public class BackgroundExecutor : IBackgroundExecutor
     }
 
     /// <inheritdoc />
-    public Task ExecuteAsync<TService>(Func<TService, Task> func)
+    public Task ExecuteAsync<TService>(Func<TService, Task> func) where TService : notnull
     {
         return Task.Run(async () =>
         {
-            using var scope = _serviceProvider.CreateScope();
+            await using var scope = _serviceProvider.CreateAsyncScope();
             {
                 var service = scope.ServiceProvider.GetRequiredService<TService>();
 
@@ -86,11 +84,11 @@ public class BackgroundExecutor : IBackgroundExecutor
     }
     
     /// <inheritdoc />
-    public Task ExecuteAsync<TService, TResult>(Func<TService, TResult> func)
+    public Task ExecuteAsync<TService, TResult>(Func<TService, TResult> func) where TService : notnull
     {
-        return Task.Run(() =>
+        return Task.Run(async () =>
         {
-            using var scope = _serviceProvider.CreateScope();
+            await using var scope = _serviceProvider.CreateAsyncScope();
             {
                 var service = scope.ServiceProvider.GetRequiredService<TService>();
 
@@ -145,26 +143,6 @@ public class BackgroundExecutor : IBackgroundExecutor
 [PublicAPI]
 public static class AsyncExecutorExtensions
 {
-    /// <summary>
-    /// Registers <see cref="IBackgroundExecutor"/> with <see cref="ContainerBuilder"/>.
-    /// </summary>
-    /// <param name="builder"><see cref="ContainerBuilder"/> instance</param>
-    /// <returns><see cref="ContainerBuilder"/> instance.</returns>
-    public static ContainerBuilder AddAsyncExecutor(this ContainerBuilder builder)
-    {
-        builder.RegisterType<BackgroundExecutor>().As<IBackgroundExecutor>().SingleInstance();
-
-        return builder;
-    }
-
-    /// <summary>
-    /// Registers <see cref="IBackgroundExecutor"/> with <see cref="ContainerBuilder"/>.
-    /// </summary>
-    /// <param name="builder"><see cref="ContainerBuilder"/> instance</param>
-    /// <returns><see cref="ContainerBuilder"/> instance.</returns>
-    public static ContainerBuilder AddBackgroundExecutor(this ContainerBuilder builder)
-        => builder.AddAsyncExecutor();
-
     /// <summary>
     /// Registers <see cref="IBackgroundExecutor"/> with <see cref="IServiceCollection"/>.
     /// </summary>
