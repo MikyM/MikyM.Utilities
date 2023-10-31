@@ -7,6 +7,7 @@ namespace MikyM.Utilities.Json;
 /// <summary>
 /// Creates instances of <see cref="NullableConverter{TValue}"/>.
 /// </summary>
+[PublicAPI]
 public class NullableConverterFactory : JsonConverterFactory
 {
     /// <inheritdoc />

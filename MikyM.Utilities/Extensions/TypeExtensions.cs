@@ -1,6 +1,4 @@
-﻿using MikyM.Utilities.Optionals;
-
-namespace MikyM.Utilities.Extensions;
+﻿namespace MikyM.Utilities.Extensions;
 
 /// <summary>
 /// Type extensions.
@@ -37,21 +35,6 @@ public static class TypeExtensions
                 return type.GetInterfaces().Except(allInterfaces.SelectMany(x => x.GetInterfaces())).ToList();
         }
     }
-
-    /// <summary>
-    /// Determines whether the given type is a closed <see cref="Optional{TValue}"/>.
-    /// </summary>
-    /// <param name="type">The type.</param>
-    /// <returns>true if the type is a closed Optional; otherwise, false.</returns>
-    public static bool IsOptional(this Type type)
-    {
-        if (!type.IsGenericType)
-        {
-            return false;
-        }
-
-        return type.GetGenericTypeDefinition() == typeof(Optional<>);
-    }
     
     /// <summary>
     /// Gets the types name while discarding anything that comes after "`" for generic types.
@@ -76,29 +59,6 @@ public static class TypeExtensions
         }
 
         return type.GetGenericTypeDefinition() == typeof(Nullable<>);
-    }
-
-    /// <summary>
-    /// Retrieves the innermost type from a type wrapped by
-    /// <see cref="Nullable{T}"/> or <see cref="Optional{TValue}"/>.
-    /// </summary>
-    /// <param name="type">The type to unwrap.</param>
-    /// <returns>The unwrapped type.</returns>
-    public static Type Unwrap(this Type type)
-    {
-        var currentType = type;
-        while (currentType.IsGenericType)
-        {
-            if (currentType.IsOptional() || currentType.IsNullable())
-            {
-                currentType = currentType.GetGenericArguments()[0];
-                continue;
-            }
-
-            break;
-        }
-
-        return currentType;
     }
 
     /// <summary>
@@ -198,41 +158,4 @@ public static class TypeExtensions
         => skipAbstract
             ? type.GetTypeInheritance().Ancestors.Select(x => x.Node).Where(x => x.IsClass && !x.IsAbstract)
             : type.GetTypeInheritance().Ancestors.Select(x => x.Node).Where(x => x.IsClass);
-
-    /// <summary>
-    /// Inheritance tree
-    /// </summary>
-    [PublicAPI]
-    public class InheritanceTree
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="node"></param>
-        /// <param name="ancestors"></param>
-        public InheritanceTree(Type node, List<InheritanceTree> ancestors)
-        {
-            Node = node;
-            Ancestors = ancestors;
-        }
-
-        /// <summary>
-        /// Current type node.
-        /// </summary>
-        public Type Node { get; set; }
-        /// <summary>
-        /// Ancestors.
-        /// </summary>
-        public List<InheritanceTree> Ancestors { get; set; }
-
-        /// <summary>
-        /// Checks whether the given type is a direct ancestor.
-        /// </summary>
-        /// <param name="type">Type to check.</param>
-        /// <returns>True if the given type is a direct ancestor, otherwise false.</returns>
-        public bool IsDirectAncestor(Type type)
-            => Ancestors.Any(x =>
-                (x.Node.IsGenericType ? x.Node.GetGenericTypeDefinition() : x.Node) ==
-                (type.IsGenericType ? type.GetGenericTypeDefinition() : type));
-    }
 }
