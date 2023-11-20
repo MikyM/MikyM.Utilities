@@ -5,7 +5,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<PackageId>MikyM.Utilities</PackageId>
-		<Version>2.3.0</Version>
+		<Version>2.3.1</Version>
 		<Authors>Krzysztof Kupisz</Authors>
 		<PackageDescription>Various utilities</PackageDescription>
 		<RepositoryUrl>https://github.com/MikyM/MikyM.Utilities</RepositoryUrl>
@@ -15,9 +15,28 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 	</PropertyGroup>
 
-	<ItemGroup>
+	<ItemGroup Condition="('$(TargetFramework)' == 'net6.0')">
+		<PackageReference Include="JetBrains.Annotations" Version="2023.3.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+	</ItemGroup>
+	<PropertyGroup Condition="('$(TargetFramework)' == 'net6.0')">
+		<DefineConstants>NET6_0</DefineConstants>
+	</PropertyGroup>
+
+	<ItemGroup Condition="('$(TargetFramework)' == 'net7.0')">
+		<PackageReference Include="JetBrains.Annotations" Version="2023.3.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
+	</ItemGroup>
+	<PropertyGroup Condition="('$(TargetFramework)' == 'net7.0')">
+		<DefineConstants>NET7_0</DefineConstants>
+	</PropertyGroup>
+
+	<ItemGroup Condition="('$(TargetFramework)' == 'net8.0')">
 		<PackageReference Include="JetBrains.Annotations" Version="2023.3.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
 	</ItemGroup>
+	<PropertyGroup Condition="('$(TargetFramework)' == 'net8.0')">
+		<DefineConstants>NET8_0</DefineConstants>
+	</PropertyGroup>
 
 </Project>
