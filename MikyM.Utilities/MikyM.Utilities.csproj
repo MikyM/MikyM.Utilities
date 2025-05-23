@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
+		<TargetFrameworks>net8.0;net9.0</TargetFrameworks>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<PackageId>MikyM.Utilities</PackageId>
@@ -15,28 +15,19 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 	</PropertyGroup>
 
-	<ItemGroup Condition="('$(TargetFramework)' == 'net6.0')">
-		<PackageReference Include="JetBrains.Annotations" Version="2023.3.0" />
-		<PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
-	</ItemGroup>
-	<PropertyGroup Condition="('$(TargetFramework)' == 'net6.0')">
-		<DefineConstants>NET6_0</DefineConstants>
-	</PropertyGroup>
-
-	<ItemGroup Condition="('$(TargetFramework)' == 'net7.0')">
-		<PackageReference Include="JetBrains.Annotations" Version="2023.3.0" />
-		<PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
-	</ItemGroup>
-	<PropertyGroup Condition="('$(TargetFramework)' == 'net7.0')">
-		<DefineConstants>NET7_0</DefineConstants>
-	</PropertyGroup>
-
 	<ItemGroup Condition="('$(TargetFramework)' == 'net8.0')">
-		<PackageReference Include="JetBrains.Annotations" Version="2023.3.0" />
+		<PackageReference Include="JetBrains.Annotations" Version="2024.3.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
 	</ItemGroup>
 	<PropertyGroup Condition="('$(TargetFramework)' == 'net8.0')">
 		<DefineConstants>NET8_0</DefineConstants>
 	</PropertyGroup>
 
+	<ItemGroup Condition="('$(TargetFramework)' == 'net9.0')">
+		<PackageReference Include="JetBrains.Annotations" Version="2024.3.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.5" />
+	</ItemGroup>
+	<PropertyGroup Condition="('$(TargetFramework)' == 'net9.0')">
+		<DefineConstants>NET9_0</DefineConstants>
+	</PropertyGroup>
 </Project>
